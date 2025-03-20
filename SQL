@@ -368,6 +368,7 @@ FROM Reserved R
 JOIN Customer C ON R.Customer_RS_Number = C.RS_Number
 JOIN Hotel H ON R.Hotel_ID = H.Hotel_ID;
 
+
 -- ==========================================================
 -- SECTION 4: DATABASE MODIFICATIONS & TRIGGER TESTING
 -- ==========================================================
@@ -389,7 +390,7 @@ SELECT * FROM Hotel_Room WHERE Hotel_ID = 1001 AND Room_ID = 2;
 -- We update the Repairs_Need field.
 -- For example, we flag Room 3 in Hotel 1001 as needing repair.
 UPDATE Hotel_Room
-SET Repairs_Need = 'Broken window - requires repair'
+SET Repairs_Need = 'Requires repair'
 WHERE Hotel_ID = 1001 AND Room_ID = 3;
 
 -- Verify the update by selecting the room's details:
