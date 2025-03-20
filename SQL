@@ -1,10 +1,13 @@
+-- ==========================================================
 -- SECTION 0: DROP & CREATE DATABASE
-
+-- ==========================================================
 DROP DATABASE IF EXISTS eHotels;
 CREATE DATABASE eHotels;
 USE eHotels;
 
+-- ==========================================================
 -- SECTION 1: DATABASE IMPLEMENTATION (Schema Creation)
+-- ==========================================================
 
 -- 1. Users Table for Role-Based Access
 CREATE TABLE Users (
@@ -186,7 +189,9 @@ FROM Hotel H
 JOIN Hotel_Room HR ON H.Hotel_ID = HR.Hotel_ID
 GROUP BY H.Hotel_ID;
 
+-- ==========================================================
 -- SECTION 2: DATABASE POPULATION (Ensure Query #4 Can Execute)
+-- ==========================================================
 
 -- 2a. Insert Manager Users & Employee Records (One per Hotel Chain)
 INSERT INTO Users (Email, Password_Hash, Role) VALUES 
@@ -332,7 +337,9 @@ VALUES
 (301, 1, 1001, '2024-07-10', '2024-07-15', TRUE),
 (302, 3, 1002, '2024-08-05', '2024-08-10', FALSE);
 
+-- ==========================================================
 -- SECTION 3: DATABASE QUERIES (Examples)
+-- ==========================================================
 
 -- Query 1: List hotels with star rating 4 or above.
 SELECT Hotel_ID, Name, Stars 
@@ -361,7 +368,9 @@ FROM Reserved R
 JOIN Customer C ON R.Customer_RS_Number = C.RS_Number
 JOIN Hotel H ON R.Hotel_ID = H.Hotel_ID;
 
+-- ==========================================================
 -- SECTION 4: DATABASE MODIFICATIONS & TRIGGER TESTING
+-- ==========================================================
 
 -- 4a. Test Trigger – Inserting a Reservation (should set room status to 'Booked')
 INSERT INTO Reserved (Customer_RS_Number, Room_ID, Hotel_ID, Start_Date, Finish_Date, Paid)
@@ -376,16 +385,17 @@ VALUES (201, 101, 2, 1001, '2025-03-01', '2025-03-05');
 -- Verify that the room status has been updated:
 SELECT * FROM Hotel_Room WHERE Hotel_ID = 1001 AND Room_ID = 2;
 
--- 4c. Test an Update Operation – Increase the price of all rooms in Hotel 1001 by 20.
-UPDATE Hotel_Room 
-SET Price = Price + 20 
-WHERE Hotel_ID = 1001;
+-- 4c. Test an Update Operation – Update the repairs status for a hotel room.
+-- We update the Repairs_Need field.
+-- For example, we flag Room 3 in Hotel 1001 as needing repair.
+UPDATE Hotel_Room
+SET Repairs_Need = 'Broken window - requires repair'
+WHERE Hotel_ID = 1001 AND Room_ID = 3;
 
--- Verify the update:
-SELECT Room_ID, Price 
-FROM Hotel_Room 
+-- Verify the update by selecting the room's details:
+SELECT Room_ID, Repairs_Need
+FROM Hotel_Room
 WHERE Hotel_ID = 1001;
-
 -- 4d. Test a Delete Operation (Cascading Delete) – Delete one hotel and its rooms.
 DELETE FROM Hotel 
 WHERE Hotel_ID = 1008;
@@ -397,9 +407,10 @@ SELECT * FROM Hotel_Room WHERE Hotel_ID = 1008;
 INSERT INTO Hotel_Room (Room_ID, Hotel_ID, Price, Capacity, View, Expandable, Repairs_Need, Amenities, Availability_Status)
 VALUES (6, 1001, 400.00, 0, 'Sea View', TRUE, '', 'TV, AC, Fridge', 'Available');
 
+-- ==========================================================
 -- SECTION 5: INDEXES & VIEWS TESTING
-
--- To check index usage:
+-- ==========================================================
+-- Use EXPLAIN to check index usage:
 EXPLAIN SELECT * FROM Hotel WHERE Hotel_Group_ID = 1;
 EXPLAIN SELECT * FROM Hotel_Room WHERE Price BETWEEN 150 AND 250;
 EXPLAIN SELECT * FROM Customer WHERE Identification_Number = '666-66-6666';
