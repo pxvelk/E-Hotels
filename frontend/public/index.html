@@ -1,43 +1,152 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#000000" />
-    <meta
-      name="description"
-      content="Web site created using create-react-app"
-    />
-    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
-    <!--
-      manifest.json provides metadata used when your web app is installed on a
-      user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
-    -->
-    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-    <!--
-      Notice the use of %PUBLIC_URL% in the tags above.
-      It will be replaced with the URL of the `public` folder during the build.
-      Only files inside the `public` folder can be referenced from the HTML.
+<head>
+    <meta charset="UTF-8">
+    <title>eHotels Booking System</title>
+    <link rel="stylesheet" type="text/css" href="index.css">
+    <script src="index.js"></script>
 
-      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
-      work correctly both with client-side routing and a non-root public URL.
-      Learn how to configure a non-root public URL by running `npm run build`.
-    -->
-    <title>React App</title>
-  </head>
-  <body>
-    <noscript>You need to enable JavaScript to run this app.</noscript>
-    <div id="root"></div>
-    <!--
-      This HTML file is a template.
-      If you open it directly in the browser, you will see an empty page.
+</head>
+<body>
+    <!-- Login Section -->
+    <div id="login-section" class="section">
+        <h2>Login</h2>
+        <div class="filter-group">
+            <select id="userRole">
+                <option value="customer">Customer</option>
+                <option value="employee">Employee</option>
+            </select>
+            <button onclick="showDashboard()">Continue</button>
+        </div>
+    </div>
 
-      You can add webfonts, meta tags, or analytics to this file.
-      The build step will place the bundled scripts into the <body> tag.
+    <!-- Customer Dashboard -->
+    <div id="customer-dashboard" class="section hidden">
+        <h2>Search Rooms <button class="role-switch" onclick="showLogin()">Logout</button></h2>
+        
+        <!-- Search Filters -->
+        <div class="filter-group">
+            <label>Dates:</label>
+            <input type="date" id="startDate"> to 
+            <input type="date" id="endDate">
+        </div>
+        
+        <div class="filter-group">
+            <label>Capacity:</label>
+            <select id="capacity">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+            </select>
+        </div>
 
-      To begin the development, run `npm start` or `yarn start`.
-      To create a production bundle, use `npm run build` or `yarn build`.
-    -->
-  </body>
+        <div class="filter-group">
+            <label>Price Range:</label>
+            $<input type="number" id="minPrice" placeholder="Min" style="width: 80px;">
+            - $<input type="number" id="maxPrice" placeholder="Max" style="width: 80px;">
+        </div>
+
+        <div class="filter-group">
+            <label>Hotel Chain:</label>
+            <select id="hotelChain">
+                <option value="">All</option>
+            </select>
+        </div>
+
+        <div class="filter-group">
+            <label>Category:</label>
+            <select id="hotelCategory">
+                <option value="">All</option>
+            </select>
+        </div>
+
+        <div class="filter-group">
+            <label>Area:</label>
+            <select id="area">
+                <option value="">All</option>
+            </select>
+        </div>
+
+        <button onclick="searchRooms()">Search</button>
+
+        <!-- Results Table -->
+        <table id="results">
+            <thead>
+                <tr>
+                    <th>Chain</th>
+                    <th>Hotel</th>
+                    <th>Room</th>
+                    <th>Price</th>
+                    <th>Capacity</th>
+                    <th>Address</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+
+        <!-- SQL Views -->
+        <div class="crud-section">
+            <div>
+                <h3>Available Rooms Per Area</h3>
+                <table id="view1">
+                    <thead><tr><th>Area</th><th>Rooms</th></tr></thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+            
+            <div>
+                <h3>Room Capacity Summary</h3>
+                <table id="view2">
+                    <thead><tr><th>Hotel</th><th>Total Capacity</th></tr></thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Employee Dashboard -->
+    <div id="employee-dashboard" class="section hidden">
+        <h2>Employee Portal <button class="role-switch" onclick="showLogin()">Logout</button></h2>
+        
+        <div class="crud-section">
+            <!-- Rental Management -->
+            <div>
+                <h3>Manage Rentals</h3>
+                <div class="filter-group">
+                    <input type="date" id="rentalStart"> to 
+                    <input type="date" id="rentalEnd">
+                    <button onclick="createRental()">Create Rental</button>
+                </div>
+                
+                <h4>Process Payment</h4>
+                <div class="filter-group">
+                    <input type="number" id="paymentAmount" placeholder="Amount">
+                    <select id="paymentMethod">
+                        <option>Credit Card</option>
+                        <option>Cash</option>
+                    </select>
+                    <button onclick="processPayment()">Process</button>
+                </div>
+            </div>
+
+            <!-- CRUD Operations -->
+            <div>
+                <h3>Manage Records</h3>
+                <select id="manageType" onchange="showCrudForm()">
+                    <option value="customers">Customers</option>
+                    <option value="employees">Employees</option>
+                    <option value="hotels">Hotels</option>
+                    <option value="rooms">Rooms</option>
+                </select>
+                
+                <div id="crudForm" class="form-row"></div>
+                <table id="recordsTable"></table>
+            </div>
+        </div>
+    </div>
+
+</body>
 </html>
