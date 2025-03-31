@@ -72,7 +72,7 @@ CREATE TABLE Hotel_Room (
     Capacity INT CHECK (Capacity > 0),
     View VARCHAR(30),
     Expandable BOOLEAN,
-    Repairs_Need TEXT,
+    Repairs_Need BOOLEAN,
     Amenities TEXT,
     Availability_Status ENUM('Available', 'Booked', 'Rented') DEFAULT 'Available',
     PRIMARY KEY (Room_ID, Hotel_ID),
@@ -284,47 +284,47 @@ VALUES
 -- Rooms for Fairmont Hotels – Hotel 1001
 INSERT INTO Hotel_Room (Room_ID, Hotel_ID, Price, Capacity, View, Expandable, Repairs_Need, Amenities, Availability_Status)
 VALUES
-(1, 1001, 150.00, 1, 'Sea View', TRUE, '', 'TV, AC', 'Available'),
-(2, 1001, 200.00, 2, 'Mountain View', FALSE, '', 'TV, AC, Fridge', 'Available'),
-(3, 1001, 250.00, 3, 'Sea View', TRUE, '', 'TV, Fridge', 'Available'),
-(4, 1001, 300.00, 4, 'Mountain View', TRUE, '', 'AC, Fridge', 'Available'),
-(5, 1001, 350.00, 5, 'Sea View', FALSE, '', 'TV, AC, Fridge, WiFi', 'Available');
+(1, 1001, 150.00, 1, 'Sea View', TRUE, FALSE, 'TV, AC', 'Available'),
+(2, 1001, 200.00, 2, 'Mountain View', FALSE, FALSE, 'TV, AC, Fridge', 'Available'),
+(3, 1001, 250.00, 3, 'Sea View', TRUE, FALSE, 'TV, Fridge', 'Available'),
+(4, 1001, 300.00, 4, 'Mountain View', TRUE, FALSE, 'AC, Fridge', 'Available'),
+(5, 1001, 350.00, 5, 'Sea View', FALSE, FALSE, 'TV, AC, Fridge, WiFi', 'Available');
 
 -- Rooms for Four Seasons – Hotel 2001
 INSERT INTO Hotel_Room (Room_ID, Hotel_ID, Price, Capacity, View, Expandable, Repairs_Need, Amenities, Availability_Status)
 VALUES
-(1, 2001, 160.00, 1, 'Sea View', TRUE, '', 'TV, AC', 'Available'),
-(2, 2001, 210.00, 2, 'Mountain View', FALSE, '', 'TV, AC, Fridge', 'Available'),
-(3, 2001, 260.00, 3, 'Sea View', TRUE, '', 'TV, Fridge', 'Available'),
-(4, 2001, 310.00, 4, 'Mountain View', TRUE, '', 'AC, Fridge', 'Available'),
-(5, 2001, 360.00, 5, 'Sea View', FALSE, '', 'TV, AC, Fridge, WiFi', 'Available');
+(1, 2001, 160.00, 1, 'Sea View', TRUE, FALSE, 'TV, AC', 'Available'),
+(2, 2001, 210.00, 2, 'Mountain View', FALSE, FALSE, 'TV, AC, Fridge', 'Available'),
+(3, 2001, 260.00, 3, 'Sea View', TRUE, FALSE, 'TV, Fridge', 'Available'),
+(4, 2001, 310.00, 4, 'Mountain View', TRUE, FALSE, 'AC, Fridge', 'Available'),
+(5, 2001, 360.00, 5, 'Sea View', FALSE, FALSE, 'TV, AC, Fridge, WiFi', 'Available');
 
 -- Rooms for Delta Hotels – Hotel 3001
 INSERT INTO Hotel_Room (Room_ID, Hotel_ID, Price, Capacity, View, Expandable, Repairs_Need, Amenities, Availability_Status)
 VALUES
-(1, 3001, 170.00, 1, 'Sea View', TRUE, '', 'TV, AC', 'Available'),
-(2, 3001, 220.00, 2, 'Mountain View', FALSE, '', 'TV, AC, Fridge', 'Available'),
-(3, 3001, 270.00, 3, 'Sea View', TRUE, '', 'TV, Fridge', 'Available'),
-(4, 3001, 320.00, 4, 'Mountain View', TRUE, '', 'AC, Fridge', 'Available'),
-(5, 3001, 370.00, 5, 'Sea View', FALSE, '', 'TV, AC, Fridge, WiFi', 'Available');
+(1, 3001, 170.00, 1, 'Sea View', TRUE, FALSE, 'TV, AC', 'Available'),
+(2, 3001, 220.00, 2, 'Mountain View', FALSE, FALSE, 'TV, AC, Fridge', 'Available'),
+(3, 3001, 270.00, 3, 'Sea View', TRUE, FALSE, 'TV, Fridge', 'Available'),
+(4, 3001, 320.00, 4, 'Mountain View', TRUE, FALSE, 'AC, Fridge', 'Available'),
+(5, 3001, 370.00, 5, 'Sea View', FALSE, FALSE, 'TV, AC, Fridge, WiFi', 'Available');
 
 -- Rooms for Sandman Hotels – Hotel 4001
 INSERT INTO Hotel_Room (Room_ID, Hotel_ID, Price, Capacity, View, Expandable, Repairs_Need, Amenities, Availability_Status)
 VALUES
-(1, 4001, 180.00, 1, 'Sea View', TRUE, '', 'TV, AC', 'Available'),
-(2, 4001, 230.00, 2, 'Mountain View', FALSE, '', 'TV, AC, Fridge', 'Available'),
-(3, 4001, 280.00, 3, 'Sea View', TRUE, '', 'TV, Fridge', 'Available'),
-(4, 4001, 330.00, 4, 'Mountain View', TRUE, '', 'AC, Fridge', 'Available'),
-(5, 4001, 380.00, 5, 'Sea View', FALSE, '', 'TV, AC, Fridge, WiFi', 'Available');
+(1, 4001, 180.00, 1, 'Sea View', TRUE, FALSE, 'TV, AC', 'Available'),
+(2, 4001, 230.00, 2, 'Mountain View', FALSE, FALSE, 'TV, AC, Fridge', 'Available'),
+(3, 4001, 280.00, 3, 'Sea View', TRUE, FALSE, 'TV, Fridge', 'Available'),
+(4, 4001, 330.00, 4, 'Mountain View', TRUE, FALSE, 'AC, Fridge', 'Available'),
+(5, 4001, 380.00, 5, 'Sea View', FALSE, FALSE, 'TV, AC, Fridge, WiFi', 'Available');
 
 -- Rooms for Holiday Inn – Hotel 5001
 INSERT INTO Hotel_Room (Room_ID, Hotel_ID, Price, Capacity, View, Expandable, Repairs_Need, Amenities, Availability_Status)
 VALUES
-(1, 5001, 190.00, 1, 'Sea View', TRUE, '', 'TV, AC', 'Available'),
-(2, 5001, 240.00, 2, 'Mountain View', FALSE, '', 'TV, AC, Fridge', 'Available'),
-(3, 5001, 290.00, 3, 'Sea View', TRUE, '', 'TV, Fridge', 'Available'),
-(4, 5001, 340.00, 4, 'Mountain View', TRUE, '', 'AC, Fridge', 'Available'),
-(5, 5001, 390.00, 5, 'Sea View', FALSE, '', 'TV, AC, Fridge, WiFi', 'Available');
+(1, 5001, 190.00, 1, 'Sea View', TRUE, FALSE, 'TV, AC', 'Available'),
+(2, 5001, 240.00, 2, 'Mountain View', FALSE, FALSE, 'TV, AC, Fridge', 'Available'),
+(3, 5001, 290.00, 3, 'Sea View', TRUE, FALSE, 'TV, Fridge', 'Available'),
+(4, 5001, 340.00, 4, 'Mountain View', TRUE, FALSE, 'AC, Fridge', 'Available'),
+(5, 5001, 390.00, 5, 'Sea View', FALSE, FALSE, 'TV, AC, Fridge, WiFi', 'Available');
 
 -- 2f. Insert Reservations (To Test Query #4)
 INSERT INTO Reserved (Customer_RS_Number, Room_ID, Hotel_ID, Start_Date, Finish_Date, Paid)
@@ -381,7 +381,7 @@ SELECT * FROM Hotel_Room WHERE Hotel_ID = 1001 AND Room_ID = 2;
 -- We update the Repairs_Need field.
 -- For example, we flag Room 3 in Hotel 1001 as needing repair.
 UPDATE Hotel_Room
-SET Repairs_Need = 'Requires repair'
+SET Repairs_Need = FALSE
 WHERE Hotel_ID = 1001 AND Room_ID = 3;
 
 -- Verify the update by selecting the room's details:
@@ -397,7 +397,7 @@ SELECT * FROM Hotel_Room WHERE Hotel_ID = 1008;
 
 -- 4e. Test Constraint Violation – Attempt to insert a room with capacity 0 (should fail).
 INSERT INTO Hotel_Room (Room_ID, Hotel_ID, Price, Capacity, View, Expandable, Repairs_Need, Amenities, Availability_Status)
-VALUES (6, 1001, 400.00, 1, 'Sea View', TRUE, '', 'TV, AC, Fridge', 'Available');
+VALUES (6, 1001, 400.00, 1, 'Sea View', TRUE, FALSE, 'TV, AC, Fridge', 'Available');
 
 
 -- SECTION 5: INDEXES & VIEWS TESTING
